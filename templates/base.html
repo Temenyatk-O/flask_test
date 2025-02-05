@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form method="post" action="/add">
+      <div>
+        <label for="doinput">Task Name:</label>
+        <input id="doinput" type="text" name="title" placeholder="Task Name" />
+        <br />
+        <button type="submit">Add</button>
+      </div>
+    </form>
+    <section>
+      {%for message in get_flashed_messages()%}
+      <div>{{message}}</div>
+      {%endfor%}
+      {% for do in do_list %}
+      <div>
+        <div>
+          <p>{{do.id}} - {{do.title}}</p>
+          {% if do.completed == false %}
+          <span>Not done</span>
+          {% else%}
+          <span>Done</span>
+          {% endif %}
+          </div>
+          <div>
+            <a href="/update/{{do.id}}">Update</a>
+            <a href="/delete/{{do.id}}">Delete</a>
+          </div>
+      {% endfor %}
+    </section>
+  </body>
+</html>
